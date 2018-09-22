@@ -1,2 +1,2 @@
-# spring-microservices-sample
-Simple Spring MicroServices Example
+# Simple Spring MicroServices Example
+
