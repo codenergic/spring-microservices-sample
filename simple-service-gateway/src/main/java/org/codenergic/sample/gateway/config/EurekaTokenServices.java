@@ -1,4 +1,3 @@
-/* Copyright (C) 2018 ASYX International B.V. All rights reserved. */
 package org.codenergic.sample.gateway.config;
 
 import java.io.IOException;
@@ -29,11 +28,6 @@ import org.springframework.web.client.DefaultResponseErrorHandler;
 import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
 
-/**
- * @author diasa
- * @version 1.0, Sep 25, 2018
- * @since
- */
 public class EurekaTokenServices implements ResourceServerTokenServices {
     protected final Log logger = LogFactory.getLog(getClass());
     private AccessTokenConverter tokenConverter = new DefaultAccessTokenConverter();
