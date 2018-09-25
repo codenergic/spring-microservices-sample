@@ -50,6 +50,7 @@ public class AuthServerOAuth2Config
             throws Exception {
         clients.jdbc(dataSource()).withClient("sampleClientId")
                 .authorizedGrantTypes("implicit").scopes("read")
+                .redirectUris("http://localhost:9092/app-login")
                 .autoApprove(true).and().withClient("clientIdPassword")
                 .secret("{noop}secret").authorizedGrantTypes("password",
                         "authorization_code", "refresh_token")
