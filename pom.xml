@@ -20,11 +20,14 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <spring-cloud.version>Greenwich.BUILD-SNAPSHOT</spring-cloud.version>
+        <oauth.version>2.3.3.RELEASE</oauth.version>
+		<jwt.version>1.0.9.RELEASE</jwt.version>
     </properties>
 
     <modules>
         <module>simple-service-discovery</module>
         <module>simple-service-gateway</module>
+        <module>simple-authorization-server</module>
         <module>simple-forex-service</module>
     </modules>
 

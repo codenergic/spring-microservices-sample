@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/forex")
 public class ForexController {
 
-    private ForexAPI forexAPI;
+    private ForexProxy forexAPI;
 
     @Autowired
-    public ForexController(ForexAPI forexAPI) {
+    public ForexController(ForexProxy forexAPI) {
         this.forexAPI = forexAPI;
     }
 

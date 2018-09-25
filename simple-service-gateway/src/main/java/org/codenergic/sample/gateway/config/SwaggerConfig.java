@@ -1,5 +1,4 @@
-/* Copyright (C) 2018 ASYX International B.V. All rights reserved. */
-package org.codenergic.sample.gateway;
+package org.codenergic.sample.gateway.config;
 
 import static springfox.documentation.builders.PathSelectors.regex;
 
@@ -15,11 +14,6 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-/**
- * @author diasa
- * @version 1.0, Sep 24, 2018
- * @since
- */
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig extends WebMvcConfigurationSupport {
