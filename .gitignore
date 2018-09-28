@@ -9,6 +9,8 @@ buildNumber.properties
 .mvn/timing.properties
 
 .idea/
+*.iml
+*/*.iml
 
 .classpath
 .project
