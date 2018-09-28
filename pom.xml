@@ -27,6 +27,7 @@
     <modules>
         <module>simple-service-discovery</module>
         <module>simple-service-gateway</module>
+        <module>simple-service-gateway-zuul</module>
         <module>simple-authorization-server</module>
         <module>simple-forex-service</module>
     </modules>
