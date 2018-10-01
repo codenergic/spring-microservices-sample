@@ -22,12 +22,13 @@
         <spring-cloud.version>Greenwich.BUILD-SNAPSHOT</spring-cloud.version>
         <oauth.version>2.3.3.RELEASE</oauth.version>
         <jwt.version>1.0.9.RELEASE</jwt.version>
+        <swagger.version>2.9.2</swagger.version>
+        <zuul.version>2.0.0.M2</zuul.version>
     </properties>
 
     <modules>
         <module>simple-service-discovery</module>
         <module>simple-service-gateway</module>
-        <module>simple-service-gateway-zuul</module>
         <module>simple-authorization-server</module>
         <module>simple-forex-service</module>
     </modules>

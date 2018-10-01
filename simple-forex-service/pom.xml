@@ -12,6 +12,7 @@
 
     <artifactId>simple-forex-service</artifactId>
     <packaging>jar</packaging>
+
     <name>simple-forex-service</name>
     <description>Simple Forex Service</description>
 
