@@ -36,13 +36,8 @@ public class ConvertApiController implements ConvertApi {
         this.request = request;
     }
 
-    public ResponseEntity<Forex> convertCurrency(
-            @ApiParam(value = "source currency",
-                    required = true) @PathVariable("from") String from,
-            @ApiParam(value = "destination currency",
-                    required = true) @PathVariable("to") String to,
-            @ApiParam(value = "amount to convert") @Valid @RequestParam(
-                    value = "amount", required = false) BigDecimal amount) {
+    public ResponseEntity<Forex> convertCurrency(String from, String to,
+            BigDecimal amount) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
