@@ -11,6 +11,7 @@ import javax.validation.Valid;
 
 import org.codenergic.sample.forex.model.Forex;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,6 +44,7 @@ public interface ConvertApi {
     @RequestMapping(value = "/convert/{from}/to/{to}",
             produces = { "application/json" },
             method = RequestMethod.GET)
+    @PreAuthorize("hasAuthority('USER')")
     ResponseEntity<Forex> convertCurrency(
             @ApiParam(value = "source currency",
                     required = true) @PathVariable("from") String from,
