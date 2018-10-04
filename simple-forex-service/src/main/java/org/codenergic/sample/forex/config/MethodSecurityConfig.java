@@ -1,4 +1,4 @@
-package org.codenergic.sample.gateway.config;
+package org.codenergic.sample.forex.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.expression.method.MethodSecurityExpressionHandler;

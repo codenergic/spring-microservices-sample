@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -32,10 +33,11 @@ public class ConvertApiController implements ConvertApi {
     }
 
     public ResponseEntity<Forex> convertCurrency(String from, String to,
-            BigDecimal amount) {
+            BigDecimal amount, Authentication auth) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
+                log.info(auth.toString());
                 return new ResponseEntity<>(objectMapper.readValue(
                         "{  \"amount\" : 149037.5,  \"rates\" : 14903.0,  \"from\" : \"IDR\",  \"to\" : \"USD\"}",
                         Forex.class), HttpStatus.OK);

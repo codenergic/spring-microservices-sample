@@ -11,6 +11,7 @@ import javax.validation.Valid;
 
 import org.codenergic.sample.forex.model.Forex;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -48,6 +49,7 @@ public interface ConvertApi {
             @ApiParam(value = "destination currency",
                     required = true) @PathVariable("to") String to,
             @ApiParam(value = "amount to convert") @Valid @RequestParam(
-                    value = "amount", required = false) BigDecimal amount);
+                    value = "amount", required = false) BigDecimal amount,
+            Authentication auth);
 
 }

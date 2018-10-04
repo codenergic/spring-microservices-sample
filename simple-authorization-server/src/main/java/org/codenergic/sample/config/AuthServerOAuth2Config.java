@@ -1,33 +1,35 @@
 package org.codenergic.sample.config;
 
+import java.util.Arrays;
+
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.Resource;
-import org.springframework.jdbc.datasource.init.DataSourceInitializer;
-import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
+import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
-
-import javax.sql.DataSource;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 @Configuration
 @EnableAuthorizationServer
 public class AuthServerOAuth2Config
         extends AuthorizationServerConfigurerAdapter {
-
     private final AuthenticationManager authenticationManager;
     private final DataSource dataSource;
 
-    public AuthServerOAuth2Config(@Qualifier("authenticationManagerBean") AuthenticationManager authenticationManager,
-                                  DataSource dataSource) {
+    public AuthServerOAuth2Config(
+            @Qualifier("authenticationManagerBean") AuthenticationManager authenticationManager,
+            DataSource dataSource) {
         this.authenticationManager = authenticationManager;
         this.dataSource = dataSource;
     }
@@ -35,7 +37,8 @@ public class AuthServerOAuth2Config
     @Override
     public void configure(AuthorizationServerSecurityConfigurer oauthServer)
             throws Exception {
-        oauthServer.allowFormAuthenticationForClients().checkTokenAccess("permitAll()");
+        oauthServer.allowFormAuthenticationForClients()
+                .checkTokenAccess("permitAll()");
     }
 
     @Override
@@ -51,22 +54,36 @@ public class AuthServerOAuth2Config
     }
 
     @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints)
+    public void configure(
+            final AuthorizationServerEndpointsConfigurer endpoints)
             throws Exception {
+        final TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
+        tokenEnhancerChain
+                .setTokenEnhancers(Arrays.asList(accessTokenConverter()));
         endpoints.tokenStore(tokenStore())
+                .tokenEnhancer(tokenEnhancerChain)
                 .authenticationManager(authenticationManager);
     }
 
     @Bean
-    public TokenStore tokenStore() {
-        return new JdbcTokenStore(dataSource);
+    @Primary
+    public DefaultTokenServices tokenServices() {
+        final DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
+        defaultTokenServices.setTokenStore(tokenStore());
+        defaultTokenServices.setSupportRefreshToken(true);
+        return defaultTokenServices;
     }
 
     @Bean
-    public DataSourceInitializer dataSourceInitializer(@Value("classpath:schema.sql") Resource schemaScript) {
-        DataSourceInitializer initializer = new DataSourceInitializer();
-        initializer.setDataSource(dataSource);
-        initializer.setDatabasePopulator(new ResourceDatabasePopulator(schemaScript));
-        return initializer;
+    public TokenStore tokenStore() {
+        return new JwtTokenStore(accessTokenConverter());
     }
+
+    @Bean
+    public JwtAccessTokenConverter accessTokenConverter() {
+        final JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+        converter.setSigningKey("123");
+        return converter;
+    }
+
 }
