@@ -1,4 +1,3 @@
-/* Copyright (C) 2018 ASYX International B.V. All rights reserved. */
 package org.codenergic.sample.forex.config;
 
 import java.io.IOException;
@@ -16,11 +15,6 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-/**
- * @author diasa
- * @version 1.0, Oct 4, 2018
- * @since
- */
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class CorsFilter implements Filter {
