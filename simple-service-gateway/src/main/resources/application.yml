@@ -10,9 +10,18 @@ eureka:
     service-url:
       defaultZone: ${EUREKA_CLIENT_SERVICE_URL_DEFAULT_ZONE:http://0.0.0.0:9090/eureka/}
 
+ribbon:
+  okhttp:
+    enabled: true
+
 zuul:
-  prefix: /api
   routes:
     forex:
       service-id: forex-service
-      path: /forex/**
+      path: /api/forex/**
+      sensitive-headers: Cookie,Set-Cookie
+    oauth:
+      service-id: authorization-server
+      path: /oauth/**
+      strip-prefix: false
+      sensitive-headers: Cookie,Set-Cookie

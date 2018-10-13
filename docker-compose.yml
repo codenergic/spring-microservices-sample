@@ -1,0 +1,28 @@
+version: '3'
+services:
+  discovery-server:
+    build: simple-service-discovery
+    ports:
+      - 9000:9090
+  forex-service:
+    build: simple-forex-service
+    environment:
+      EUREKA_CLIENT_SERVICE_URL_DEFAULT_ZONE: http://discovery-server:9090/eureka/
+    depends_on:
+      - discovery-server
+  oauth2-authorization-server:
+    build: simple-authorization-server
+    ports:
+      - 9001:9091
+    environment:
+      EUREKA_CLIENT_SERVICE_URL_DEFAULT_ZONE: http://discovery-server:9090/eureka/
+    depends_on:
+      - discovery-server
+  service-gateway:
+    build: simple-service-gateway
+    ports:
+      - 9002:9092
+    environment:
+      EUREKA_CLIENT_SERVICE_URL_DEFAULT_ZONE: http://discovery-server:9090/eureka/
+    depends_on:
+      - discovery-server
