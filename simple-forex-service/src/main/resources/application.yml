@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: forex-service
+
+server:
+  port: 9093
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_CLIENT_SERVICE_URL_DEFAULT_ZONE:http://0.0.0.0:9090/eureka/}

@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: service-dicovery-server
+
+server:
+  port: 9090
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: ${EUREKA_CLIENT_SERVICE_URL_DEFAULT_ZONE:http://0.0.0.0:9090/eureka/}
+  server:
+    renewal-threshold-update-interval-ms: 30000

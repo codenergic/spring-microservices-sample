@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: authorization-server
+  thymeleaf:
+    enabled: true
+    cache: false
+  datasource:
+    url: jdbc:h2:~/data/oauth2;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE
+    username: sa
+
+server:
+  port: 9091
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_CLIENT_SERVICE_URL_DEFAULT_ZONE:http://0.0.0.0:9090/eureka/}
