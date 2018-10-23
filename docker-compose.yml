@@ -4,16 +4,23 @@ services:
     build: simple-service-discovery
     ports:
       - 9000:9090
+  admin-dashboard:
+    build: simple-admin-server
+    ports:
+      - 9001:9094
+    environment:
+      EUREKA_CLIENT_SERVICE_URL_DEFAULT_ZONE: http://discovery-server:9090/eureka/
+    depends_on:
+      - discovery-server
   forex-service:
     build: simple-forex-service
     environment:
+      SERVER_PORT: 0
       EUREKA_CLIENT_SERVICE_URL_DEFAULT_ZONE: http://discovery-server:9090/eureka/
     depends_on:
       - discovery-server
   oauth2-authorization-server:
     build: simple-authorization-server
-    ports:
-      - 9001:9091
     environment:
       EUREKA_CLIENT_SERVICE_URL_DEFAULT_ZONE: http://discovery-server:9090/eureka/
     depends_on:

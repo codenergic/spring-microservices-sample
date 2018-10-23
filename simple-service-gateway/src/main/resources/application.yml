@@ -1,19 +1,17 @@
 spring:
   application:
     name: service-gateway
-
 server:
   port: 9092
-
 eureka:
   client:
     service-url:
       defaultZone: ${EUREKA_CLIENT_SERVICE_URL_DEFAULT_ZONE:http://0.0.0.0:9090/eureka/}
-
-ribbon:
-  okhttp:
-    enabled: true
-
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
 zuul:
   routes:
     forex:

@@ -20,8 +20,11 @@ public class OAuth2ResourceServerConfig
 
     @Override
     public void configure(final HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/**").authenticated().anyRequest()
-                .permitAll().and().sessionManagement()
+        http.authorizeRequests()
+                .antMatchers("/actuator/**").permitAll()
+                .antMatchers("/**").authenticated()
+                .and()
+                .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
