@@ -1,8 +1,8 @@
 spring:
   application:
-    name: forex-service
+    name: admin-server
 server:
-  port: 9093
+  port: 9094
 eureka:
   client:
     service-url:
